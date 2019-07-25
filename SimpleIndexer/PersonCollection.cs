@@ -9,22 +9,22 @@ namespace SimpleIndexer
 {
     public class PersonCollection : IEnumerable
     {
-        private ArrayList arPeople = new ArrayList();
-        public Person this[int index]
+        private Dictionary<string, Person> listPeople = new Dictionary<string, Person>();
+        public Person this[string name]
         {
-            get => (Person)arPeople[index];
-            set => arPeople.Insert(index, value);
+            get => (Person)listPeople[name];
+            set => listPeople[name] = value;
         }
         // Cast for caller.
-        public Person GetPerson(int pos) => (Person)arPeople[pos];
+        public Person GetPerson(string name) => (Person)listPeople[name];
         // Insert only Person objects.
-        public void AddPerson(Person p)
-        { arPeople.Add(p); }
+        public void AddPerson(string k, Person p)
+        { listPeople.Add(k, p); }
         public void ClearPeople()
-        { arPeople.Clear(); }
+        { listPeople.Clear(); }
 
-        public int Count => arPeople.Count;
+        public int Count => listPeople.Count;
         // Foreach enumeration support.
-        IEnumerator IEnumerable.GetEnumerator() => arPeople.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => listPeople.GetEnumerator();
     }
 }
